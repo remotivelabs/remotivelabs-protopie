@@ -37,7 +37,7 @@ function context(brokerUrl) {
 
 function useBrokerApi(brokerUrl, apiKey, clientId) {
 
-    
+
     const grpcBrokerUrl = grpcUrl(brokerUrl)
     console.log("connecting to " + grpcBrokerUrl)
     const grpcObj = protoLoader.loadSync(PROTO_PATHS, options);
@@ -66,6 +66,15 @@ function useBrokerApi(brokerUrl, apiKey, clientId) {
         })
     }
 
+    /**
+     * Lists all signals
+     * [
+     *   {
+     *       "name" : "signalName",
+     *       "namespace": "namespace_name"
+     *   }
+     * ]
+     */
     function listAllSignals() {
 
         return new Promise((resolve, reject) => {
@@ -91,7 +100,7 @@ function useBrokerApi(brokerUrl, apiKey, clientId) {
                     reject(error)
                 } else {
                     const signalNames = res.frame.map(f => {
-                        //console.log(f.signalInfo)
+                            //console.log(f.signalInfo)
                             return {namespace: namespace, name: f.signalInfo.id.name}
                         }
                     )
@@ -113,7 +122,7 @@ function useBrokerApi(brokerUrl, apiKey, clientId) {
         })
 
         const subscriberConfig = {
-            clientId: {id:clientId},
+            clientId: {id: clientId},
             signals: {signalId: signalIds},
             onChange: onlyOnChange
         }
