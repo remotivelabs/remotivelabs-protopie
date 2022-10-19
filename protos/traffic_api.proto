@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+import "common.proto";
+import "system_api.proto";
+
+package base;
+
+service TrafficService {
+  rpc PlayTraffic (PlaybackInfos) returns (PlaybackInfos) {}
+  rpc PlayTrafficStatus (Empty) returns (stream PlaybackInfos) {}
+}
+
+enum Mode {
+  PLAY = 0;
+  PAUSE = 1;
+  STOP = 2;
+  RECORD = 3;
+}
+
+message PlaybackMode {
+  oneof status {
+      string errorMessage = 2;
+      string EOF = 3;
+      Mode mode = 4;
+    }
+  uint64 offsetTime = 5;
+  uint64 startTime = 6;
+  uint64 endTime = 7;
+  int64 timeDeviation = 8;
+}
+
+message PlaybackInfos {
+  repeated PlaybackInfo playbackInfo = 1;
+}
+
+message PlaybackConfig {
+  FileDescription fileDescription = 1;
+  NameSpace namespace = 2;
+}
+
+message PlaybackInfo {
+  PlaybackConfig playbackConfig = 1;
+  PlaybackMode playbackMode = 2;
+}
+

@@ -1,0 +1,15 @@
+{
+  "name": "remotivelabs-protopie-connect",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.7.2",
+    "@grpc/proto-loader": "^0.7.3",
+    "bcrypt": "^5.1.0"
+  }
+}

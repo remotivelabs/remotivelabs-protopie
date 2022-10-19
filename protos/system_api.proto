@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+import "common.proto";
+
+package base;
+
+service SystemService {
+  rpc GetConfiguration (Empty) returns (Configuration) {}
+  rpc ListSignals (NameSpace) returns (Frames) {}
+
+  // Upload file using chunks (without streams), specifically useful for gRPC-web which does not support Client-side streaming. 
+  rpc UploadFileChunk (FileUploadChunkRequest) returns (FileUploadResponse) {}
+
+  // Upload file using streams, preferred option for client with Client-side streaming.
+  rpc UploadFile (stream FileUploadRequest) returns (FileUploadResponse) {}
+
+  // Download file
+  rpc DownloadFile (FileDescription) returns (stream FileDownloadResponse) {}
+
+  // will not return until new configuration is tested an active, make sure to set timeout to a large value. (fibex on pi > 50s)
+  rpc ReloadConfiguration (Empty) returns (ReloadMessage) {}
+
+  rpc GetLicenseInfo (Empty) returns (LicenseInfo) {}
+  rpc SetLicense (License) returns (LicenseInfo) {}
+}
+
+message Configuration {
+  repeated NetworkInfo networkInfo = 1;
+  bytes interfacesJson = 2;
+  string publicAddress = 4;
+  string serverVersion = 5;
+}
+
+message ReloadMessage{
+    oneof status {
+      Configuration configuration = 1;
+      string errorMessage = 2;
+    }
+}
+
+message FileDescription{
+    string sha256 = 1; // base16 encoded and not relevant when downloading
+    string path = 2;
+}
+
+/**
+ * sha256 which is part of FileDescription only needs to be submitted in the last chunk. 
+ */
+message FileUploadRequest{
+    oneof data {
+      FileDescription fileDescription = 1;
+      bytes chunk = 2;
+    }
+}
+
+/**
+ * sha256 which is part of FileDescription only needs to be submitted in the last chunk. 
+ */
+message FileUploadChunkRequest{
+    FileDescription fileDescription = 1;
+    uint32 chunks = 2;
+    uint32 chunkId = 3;
+    bytes chunk = 4;
+    bool cancelUpload = 5;
+    uint32 uploadTimeout = 6;
+}
+
+message FileUploadResponse{
+    oneof data {
+        bool finished = 1;
+        bool cancelled = 2;
+        string errorMessage = 3;
+    };
+}
+
+message FileDownloadResponse{
+    oneof data {
+        bytes chunk = 1;
+        string errorMessage = 2;
+    };
+}
+
+enum LicenseStatus {
+  UNSET = 0;
+  VALID = 1;
+  EXPIRED = 2;
+  BADDATE = 3;
+  WRONGMACHINE = 4;
+  INCOMPLETEJSON = 5;
+  INVALIDJSON = 6;
+  BADSIGNATURE = 7;
+  MALFORMED = 8;
+  SERVERERROR = 9;
+  NOTERMSAGREEMENT = 10;
+}
+
+message LicenseInfo {
+  LicenseStatus status = 1;
+  bytes json = 2; // verbatim json from the license data (if base64-decodable)
+  string expires = 3; // extracted from json for convenience
+  string requestId = 4; // info to use when requesting a new license
+  bytes requestMachineId = 5;
+}
+
+message License {
+  bytes data = 1;
+  bool termsAgreement = 2;
+}
