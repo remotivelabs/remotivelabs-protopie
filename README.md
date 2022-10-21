@@ -9,7 +9,7 @@ npm install
 
 ## Test it out
 
-## Go to https://demo.remotivelabs.com
+Go to https://demo.remotivelabs.com
 
 * Follow instructions on how to start a broker and play the recording.
 * Use "Explore" to open RemotiveBrokerApp and start the recording 
