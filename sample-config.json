@@ -1,0 +1,20 @@
+{
+  "broker": {
+    "url": "https://johan-testar-protopie-demo-uo7acw3qiq-ez.a.run.app",
+    "apiKey": "johan-testar-protopie"
+  },
+  "subscription": {
+    "VehicleSpeed": {
+      "namespace": "custom_can",
+      "mapTo": "Speed"
+    },
+    "ChassisSteeringwheelAngle": {
+      "namespace": "custom_can",
+      "mapTo": "SteeringAngle"
+    },
+    "ChassisAcceleratorPedalposition": {
+      "namespace": "custom_can",
+      "mapTo": "PedalPosition"
+    }
+  }
+}

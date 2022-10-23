@@ -19,7 +19,7 @@ const io = require("socket.io-client");
 // Modify this with the name of your Bridge App.
 // This is what will be displayed in ProtoPie connect
 // as the source of any messages sent from this app.
-const PP_CONNECT_APP_NAME = "App name";
+const PP_CONNECT_APP_NAME = "RemotiveBridge";
 
 // This should work fine if you have this app and ProtoPie
 // Connect running on the same computer with the default settings.
@@ -28,27 +28,19 @@ const PP_CONNECT_APP_NAME = "App name";
 const PP_CONNECT_SERVER_ADDRESS = "http://127.0.0.1:9981";
 
 const useBroker = require("./broker.js");
-
-let url;
-let optionalApiKey = undefined;
+const fs = require('fs');
 
 const args = process.argv.slice(2);
-if (args.length === 0 || args.length > 2) {
-    console.log("Use: node usage.js brokerUrl [apiKey]")
+if (args.length !== 1) {
+    console.log("Use: node usage.js <config-file.json>")
     exit(0)
 }
-url = args[0]
 
-if (args.length === 2) {
-    optionalApiKey = args[1]
-}
+let config = JSON.parse( fs.readFileSync(args[0]).toString("utf-8"));
 
-
-//const url = 'https://protopie-beamyhack-sglnqbpwoa-ez.a.run.app'
-//const optionalApiKey = 'protopie-key'
 const broker = useBroker(
-    brokerUrl = url,
-    apiKey = optionalApiKey,
+    brokerUrl = config.broker.url,
+    apiKey = config.broker.apiKey,
     clientId = "protopie")
 
 // This establishes the connection to ProtoPie Connect via Socket.io
@@ -63,6 +55,21 @@ ppConnect
         console.log("[PP-CONNECT] Connected to ProtoPie Connect on", PP_CONNECT_SERVER_ADDRESS);
         ppConnect.emit("ppBridgeApp", {name: PP_CONNECT_APP_NAME});
         sendMessageToConnect("PLUGIN_STARTED", PP_CONNECT_APP_NAME);
+
+        const signalsToSubscribeOn = Object.keys(config.subscription).map( signalName => {
+            return {'namespace' : config.subscription[signalName].namespace, 'signal' : signalName}
+        })
+
+        const subscription = broker.subscribe(signalsToSubscribeOn, true)
+
+        subscription.on('data', function (response) {
+            for (signal of response.signal) {
+                console.log(signal)
+                const name = config.subscription[signal.id.name].mapTo ? config.subscription[signal.id.name].mapTo : signal.id.name
+                sendMessageToConnect(name, getSignalValue(signal))
+            }
+        });
+
 // =========> Successful connection to ProtoPie Connect. do app stuff here
 
     })
@@ -76,34 +83,11 @@ ppConnect
             case "FOO":
                 console.log(message.value);
                 break;
-            case "SIG_LIST":
-                broker.listAllSignals()
-                    .then((signals) => {
-                        console.log(signals)
-                        signals.map(s => sendMessageToConnect("SIG_NAME", s.name))
-                    })
-                break
-            case "SUBSCRIBE":
-                const subscription = broker.subscribe([{namespace: 'custom_can', signal: 'VehicleSpeed'}], true)
-
-                console.log("Got subscription")
-                subscription.on('data', function (response) {
-                    console.log(response.signal);
-                    for (signal of response.signal) {
-                        sendMessageToConnect(signal.id.name, signal.integer)
-                    }
-
-                });
-                break
         }
-
-
     });
 
 // Use this function to send messages to ProtoPie Connect
 function sendMessageToConnect(messageId, value) {
-
-    console.log(`[PP-CONNECT] Sending message '${messageId}:${value}' to ProtoPie Connect`);
 
     ppConnect.emit("ppMessage", {
         messageId,
@@ -111,6 +95,17 @@ function sendMessageToConnect(messageId, value) {
     });
 }
 
+function getSignalValue(signal) {
+    if (signal.payload == 'double') {
+        return signal.double
+    } else if (signal.payload == 'integer') {
+        return signal.integer
+    } else if (signal.payload == 'arbitration') {
+        return signal.arbitration
+    }
+
+
+}
 
 //------------- ProtoPie Connect Socket.io connection error handling -------------
 
