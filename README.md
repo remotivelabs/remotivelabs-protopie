@@ -31,12 +31,12 @@ You should now see signals showing up in Protopie connect
 {
   "broker": {
     "url": "https://protopie-demo-uo7acw3qiq-ez.a.run.app",
-    "apiKey": "my-api-key"
+    "apiKey": "protopie-demo-key"
   },
   "subscription": {
     "VehicleSpeed": {            <- Name in vehicle bus
       "namespace": "custom_can",
-      "mapTo": "Speed"           <- name in protopie connect (optional)
+      "mapTo": "Speed"           <- Name in protopie connect
     }
   }
 }

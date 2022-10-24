@@ -39,7 +39,7 @@ function useBrokerApi(brokerUrl, apiKey, clientId) {
 
 
     const grpcBrokerUrl = grpcUrl(brokerUrl)
-    console.log("connecting to " + grpcBrokerUrl)
+    console.log("[BROKER_CLIENT] Connecting to " + grpcBrokerUrl)
     const grpcObj = protoLoader.loadSync(PROTO_PATHS, options);
 
     const SystemService = grpc.loadPackageDefinition(grpcObj).base.SystemService;

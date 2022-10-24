@@ -1,7 +1,7 @@
 {
   "broker": {
-    "url": "https://johan-testar-protopie-demo-uo7acw3qiq-ez.a.run.app",
-    "apiKey": "johan-testar-protopie"
+    "url": "https://protopie-demo-uo7acw3qiq-ez.a.run.app",
+    "apiKey": "protopie-demo-key"
   },
   "subscription": {
     "VehicleSpeed": {

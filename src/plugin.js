@@ -43,6 +43,7 @@ const broker = useBroker(
     apiKey = config.broker.apiKey,
     clientId = "protopie")
 
+
 // This establishes the connection to ProtoPie Connect via Socket.io
 console.log("[PP-CONNECT] Connecting to ProtoPie Connect on", PP_CONNECT_SERVER_ADDRESS);
 const ppConnect = io(PP_CONNECT_SERVER_ADDRESS, {
@@ -56,6 +57,10 @@ ppConnect
         ppConnect.emit("ppBridgeApp", {name: PP_CONNECT_APP_NAME});
         sendMessageToConnect("PLUGIN_STARTED", PP_CONNECT_APP_NAME);
 
+        console.log("[PP-CONNECT] Verifying broker connection")
+        const license = await broker.getLicense()
+        console.log("[PP-CONNECT] Broker connection successfully verified")
+        sendMessageToConnect("BROKER_CONNECTED", "yes");
         const signalsToSubscribeOn = Object.keys(config.subscription).map( signalName => {
             return {'namespace' : config.subscription[signalName].namespace, 'signal' : signalName}
         })
