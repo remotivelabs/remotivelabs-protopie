@@ -6,29 +6,33 @@ RemotiveBroker integration using Protopie connect
 
 
 ```
-npm install
+
 ```
 
 
 ## Test it out
 
+### Start cloud broker and recording
+
 Go to https://demo.remotivelabs.com
 
 * Follow instructions on how to start a broker and play the recording.
-* Use "Explore" to open RemotiveBrokerApp and start the recording 
-* From the final step, use the broker url and api-key as arguments when starting in the next step
-* Open (or copy) sample-config.json and update broker url+apiKey
+* Open (or copy) sample-config.json and update broker url+apiKey according to the broker you just started.
+* Use "Explore" to open RemotiveBrokerApp and start the recording under Playback using the play button.
 
 ### Start connect bridge
 ```
+npm install
 npm start sample-config.json
 ```
+## Run Pie
 
-You should now see signals showing up in Protopie connect
+* You should now see signals showing up in Protopie connect.
+* Add car-integration_v5_just_speed.pie to ProtoPie connect and start it in web-browser.
+* That should be it!
+
 
 ## Config
-
-
 
 ```
 {
