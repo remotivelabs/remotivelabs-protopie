@@ -14,6 +14,8 @@ RemotiveBroker integration using Protopie connect
 
 ### Start cloud broker and recording
 
+<iframe src="https://drive.google.com/file/d/1m8pfbSK_9-iaI2JSssdcok8O8nYs0mIM/preview" width="640" height="480" allow="autoplay"></iframe>
+
 Go to https://demo.remotivelabs.com
 
 * Follow instructions on how to start a broker and play the recording.
