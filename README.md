@@ -12,15 +12,18 @@ RemotiveBroker integration using Protopie connect
 
 ## Test it out
 
-### Start cloud broker and recording
+### Start recording in cloud
 
-<iframe src="https://drive.google.com/file/d/1m8pfbSK_9-iaI2JSssdcok8O8nYs0mIM/preview" width="640" height="480" allow="autoplay"></iframe>
 
-Go to https://demo.remotivelabs.com
+Here is a video showing how to start the recording in RemotiveCloud
 
-* Follow instructions on how to start a broker and play the recording.
-* Open (or copy) sample-config.json and update broker url+apiKey according to the broker you just started.
-* Use "Explore" to open RemotiveBrokerApp and start the recording under Playback using the play button.
+https://drive.google.com/file/d/1m8pfbSK_9-iaI2JSssdcok8O8nYs0mIM/view?usp=share_link
+
+* Go to https://cloud.remotivelabs.com and login.
+* Go to https://cloud.remotivelabs.com/p/protopie-collab/recordings/4256668064375193000 and press "play" button, choose broker "protopie-demo".
+* Next, click "Explore" to open RemotiveBrokerApp in a separate tab. Optionally subscribe to some channels and start the recording. Use can start, stop, pause the recording.
+
+**NOTE! The recording must be enabled on the broker before starting the bridge**
 
 ### Start connect bridge
 ```
@@ -39,8 +42,8 @@ npm start sample-config.json
 ```
 {
   "broker": {
-    "url": "https://protopie-demo-uo7acw3qiq-ez.a.run.app",
-    "apiKey": "protopie-demo-key"
+    "url": "https://protopie-demo-protopie-collab-sglnqbpwoa-ez.a.run.app",
+    "apiKey": "protopie-demo"
   },
   "subscription": {
     "VehicleSpeed": {            <- Name in vehicle bus
