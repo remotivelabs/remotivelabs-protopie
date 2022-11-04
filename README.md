@@ -4,11 +4,9 @@ RemotiveBroker integration using Protopie connect
 
 ![alt text](screenshot.png "Screenshot")
 
+Video showing how they work together
 
-```
-
-```
-
+https://drive.google.com/file/d/1fmmZ5O9-L662JSRRaiTEPyP4aii77r7Z/view?usp=share_link
 
 ## Test it out
 
