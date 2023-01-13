@@ -1,7 +1,8 @@
 {
   "broker": {
-    "url": "https://protopie-demo-uo7acw3qiq-ez.a.run.app",
-    "apiKey": "protopie-demo-key"
+    
+    "url": "https://protopie-demo-protopie-collab-sglnqbpwoa-ez.a.run.app",
+    "apiKey": "protopie-demo"
   },
   "subscription": {
     "VehicleSpeed": {

@@ -73,6 +73,11 @@ ppConnect
                 const name = config.subscription[signal.id.name].mapTo ? config.subscription[signal.id.name].mapTo : signal.id.name
                 sendMessageToConnect(name, getSignalValue(signal))
             }
+        }).on('end', function() {
+            console.log('Subscription stream ended')
+        }).on('error', function(err) {
+            console.log('Subscription stream received error')
+            console.log(err)
         });
 
 // =========> Successful connection to ProtoPie Connect. do app stuff here
