@@ -1,8 +1,9 @@
-# RemotiveLabs and Protopie
+# RemotiveLabs + Protopie
 
-Use our RemotiveCloud to integrate with Protopie
+Use our RemotiveCloud together with Protopie and feed real vehicle signals 
+into your prototype.
 
-https://www.protopie.io/blog/challenging-the-status-quo-in-automotive-prototyping
+Read this blogpost for a good introduction https://www.protopie.io/blog/challenging-the-status-quo-in-automotive-prototyping
 
 ![alt text](screenshot.png "Screenshot")
 
@@ -10,12 +11,12 @@ https://www.protopie.io/blog/challenging-the-status-quo-in-automotive-prototypin
 
 This solution requires [Protopie-Connect](https://www.protopie.io/learn/docs/connect/getting-started) which in turn requires a Protopie Pro or Enterprise [plan](https://www.protopie.io/plans).
 
-
+*Disclaimer: This is a fully functional but not yet officially released protopie-connect bridge-app*
 <hr />
 
-Here is a video showing how to start the recording in RemotiveCloud, its highly recommended to watch this video since it performs every step required.
-
-https://drive.google.com/file/d/1dG7x7oGb7BTTzivjrDZOmaoydUuraiGW/view?usp=sharing
+Here is a video that goes through each step in this README, its highly recommended
+to watch this video to get a better understanding of how it works.
+**[Show video with complete demo (6 min)](https://drive.google.com/file/d/1dG7x7oGb7BTTzivjrDZOmaoydUuraiGW/view?usp=sharing)**
 
 
 ## Prepare recording in RemotiveCloud
