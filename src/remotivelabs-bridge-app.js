@@ -1,18 +1,29 @@
-/*
- * ProtoPie Connect Bridge App Boilerplate code for Node.js
- * Author: Jeff Clarke
- *
- * Make sure to install dependencies with
- *
- * 		npm install
- *
- * Then run this file with
- *
- *		npm start
- *
- */
-
 const io = require("socket.io-client");
+
+const  {parseArgs} =  require("node:util");
+
+const {
+    values: { url, api_key,config },
+} = parseArgs({
+    options: {
+        url: {
+            type: "string",
+            short: "b",
+        },
+        api_key: {
+            type: "string",
+            short: "k",
+        },
+        config: {
+            type: "string",
+            short: "c"
+        }
+    },
+});
+
+console.log("hello")
+console.log(`${url} has ${api_key}`);
+
 
 //------------- ProtoPie Connect configiration -------------
 
@@ -30,17 +41,17 @@ const PP_CONNECT_SERVER_ADDRESS = "http://127.0.0.1:9981";
 const useBroker = require("./broker.js");
 const fs = require('fs');
 
-const args = process.argv.slice(2);
+/*const args = process.argv.slice(2);
 if (args.length !== 1) {
     console.log("Use: node usage.js <config-file.json>")
     exit(0)
-}
+}*/
 
-let config = JSON.parse( fs.readFileSync(args[0]).toString("utf-8"));
+let jsonConfig = JSON.parse( fs.readFileSync(config).toString("utf-8"));
 
 const broker = useBroker(
-    brokerUrl = config.broker.url,
-    apiKey = config.broker.apiKey,
+    brokerUrl = url,
+    apiKey = api_key,
     clientId = "protopie")
 
 
@@ -58,11 +69,19 @@ ppConnect
         sendMessageToConnect("PLUGIN_STARTED", PP_CONNECT_APP_NAME);
 
         console.log("[PP-CONNECT] Verifying broker connection")
-        const license = await broker.getLicense()
-        console.log("[PP-CONNECT] Broker connection successfully verified")
+
+        try {
+            const license = await broker.getLicense()
+            console.log("[PP-CONNECT] Broker connection successfully verified")
+        } catch (e) {
+            console.error("Failed to connect to broker")
+            console.error(e.message)
+            process.exit(1)
+        }
+
         sendMessageToConnect("BROKER_CONNECTED", "yes");
-        const signalsToSubscribeOn = Object.keys(config.subscription).map( signalName => {
-            return {'namespace' : config.subscription[signalName].namespace, 'signal' : signalName}
+        const signalsToSubscribeOn = Object.keys(jsonConfig.subscription).map( signalName => {
+            return {'namespace' : jsonConfig.subscription[signalName].namespace, 'signal' : signalName}
         })
 
         const subscription = broker.subscribe(signalsToSubscribeOn, true)
@@ -70,7 +89,7 @@ ppConnect
         subscription.on('data', function (response) {
             for (signal of response.signal) {
                 console.log(signal)
-                const name = config.subscription[signal.id.name].mapTo ? config.subscription[signal.id.name].mapTo : signal.id.name
+                const name = jsonConfig.subscription[signal.id.name].mapTo ? jsonConfig.subscription[signal.id.name].mapTo : signal.id.name
                 sendMessageToConnect(name, getSignalValue(signal))
             }
         }).on('end', function() {

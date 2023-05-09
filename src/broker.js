@@ -2,9 +2,9 @@ const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 
 const PROTO_PATHS = [
-    __dirname + "/../protos/system_api.proto",
-    __dirname + "/../protos/network_api.proto",
-    __dirname + "/../protos/common.proto"
+    __dirname + "/protos/system_api.proto",
+    __dirname + "/protos/network_api.proto",
+    __dirname + "/protos/common.proto"
 ]
 
 const options = {

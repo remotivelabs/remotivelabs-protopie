@@ -1,0 +1,46 @@
+{
+  "subscription": {
+    "DI_uiSpeed": {
+      "namespace": "VehicleBus",
+      "mapTo": "Speed"
+    },
+    "DI_vehicleSpeed": {
+      "namespace": "VehicleBus",
+      "mapTo": "VehicleSpeed"
+    },
+
+    "DI_accelPedalPos": {
+      "namespace": "VehicleBus",
+      "mapTo": "AccelPedalPosition"
+    },
+    "DI_gear": {
+      "namespace": "VehicleBus",
+      "mapTo": "GearPRND"      
+    },
+
+    "VCFRONT_indicatorRightRequest": {
+      "namespace": "VehicleBus",
+      "mapTo": "RightIndicator"
+    }, 
+    "VCFRONT_indicatorLeftRequest": {
+      "namespace": "VehicleBus",
+      "mapTo": "LeftIndicator"
+    }, 
+    
+    "SteeringAngle129": {
+      "namespace": "VehicleBus",
+      "mapTo": "SteeringAngle"
+    },
+    
+    
+    "BMS_nominalEnergyRemaining": {
+      "namespace": "VehicleBus",
+      "mapTo": "BatteryRemainingKwh" 
+    },
+    "BMS_nominalFullPackEnergy": {
+      "namespace": "VehicleBus",
+      "mapTo": "BatteryFullKwh" 
+    }
+
+  }
+}
