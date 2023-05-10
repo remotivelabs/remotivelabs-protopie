@@ -73,8 +73,9 @@ There are two bundled *pies* with this demo, one with only speed
 
 ## Troubleshooting
 
+Some common errors
 
-### Connect failure
+### Connect failures
 
 * Mostly, the reason is that there is no broker listening to the url you have provided. Please check the url of the broker again.
 
@@ -83,13 +84,17 @@ Failed to connect to broker
 13 INTERNAL: Received RST_STREAM with code 0
 ```
 
-
 * Check your APP_KEY so that matches
-
 
 ```
 Failed to connect to broker
 2 UNKNOWN:
+```
+
+* If you get this message directly when connecting its probably due to you are subscribing
+  to a signal that does not exist
+```
+Subscription stream ended
 ```
 
 Please do not hesitate to use our discussion/community forum for questions regarding this.
