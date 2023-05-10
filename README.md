@@ -52,6 +52,10 @@ node src/remotivelabs-bridge-app.js \
     --config samples/instrument-cluster-config.json
 ```
 
+If you get this error you are using node < 18.3 so please update to a newer version.
+    
+    TypeError: parseArgs is not a function
+
 ### Play the recording
 
 Once the bridge-app is running you can "play" the recording from the RemotiveBrokerApp. 
