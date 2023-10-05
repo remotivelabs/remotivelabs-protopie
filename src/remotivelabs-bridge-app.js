@@ -84,14 +84,19 @@ ppConnect
             return {'namespace' : jsonConfig.subscription[signalName].namespace, 'signal' : signalName}
         })
 
-        const subscription = broker.subscribe(signalsToSubscribeOn, true)
+        const subscription = broker.subscribe(signalsToSubscribeOn, false)
 
         subscription.on('data', function (response) {
+            try {
             for (signal of response.signal) {
-                console.log(signal)
+                //console.log(signal)
                 const name = jsonConfig.subscription[signal.id.name].mapTo ? jsonConfig.subscription[signal.id.name].mapTo : signal.id.name
                 sendMessageToConnect(name, getSignalValue(signal))
             }
+        } catch (e) {
+            console.log(e)
+        }
+            
         }).on('end', function() {
             console.log('Subscription stream ended')
         }).on('error', function(err) {
@@ -132,7 +137,8 @@ function getSignalValue(signal) {
     } else if (signal.payload == 'arbitration') {
         return signal.arbitration
     }
-
+    // Cannot handle this
+    return 0
 
 }
 

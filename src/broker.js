@@ -110,7 +110,7 @@ function useBrokerApi(brokerUrl, apiKey, clientId) {
         })
     }
 
-    function subscribe(signals, onlyOnChange = true) {
+    function subscribe(signals, onlyOnChange = false) {
 
         const signalIds = signals.map(signal => {
             return {
