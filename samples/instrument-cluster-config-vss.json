@@ -1,0 +1,80 @@
+{
+  "subscription": {
+    "Vehicle.Speed": {
+      "namespace": "vss",
+      "mapTo": "Speed"
+    },
+
+
+    "Vehicle.Chassis.Accelerator.PedalPosition": {
+      "namespace": "vss",
+      "mapTo": "AccelPedalPosition"
+    },
+
+    "Vehicle.Powertrain.Transmission.CurrentGear": {
+      "namespace": "vss",
+      "mapTo": "GearPRND"      
+    },
+
+    "Vehicle.Body.Lights.IsRightIndicatorOn": {
+      "namespace": "vss",
+      "mapTo": "RightIndicator"
+    }, 
+
+    "Vehicle.Body.Lights.IsLeftIndicatorOn": {
+      "namespace": "vss",
+      "mapTo": "LeftIndicator"
+    }, 
+    
+    "Vehicle.Chassis.SteeringWheel.Angle": {
+      "namespace": "vss",
+      "mapTo": "SteeringAngle"
+    },
+    
+    "Vehicle.Powertrain.TractionBattery.StateOfCharge.CurrentEnergy": {
+      "namespace": "vss",
+      "mapTo": "BatteryRemainingKwh" 
+    },
+    
+    "Vehicle.Powertrain.TractionBattery.NominalVoltage": {
+      "namespace": "vss",
+      "mapTo": "BatteryFullKwh" 
+    },
+    "Vehicle.Powertrain.TractionBattery.StateOfCharge.Displayed": {
+      "namespace" : "vss",
+      "mapTo" : "BatteryRemainingPercent"
+    },
+    "Vehicle.CurrentLocation.Latitude" : {
+      "namespace" : "vss",
+      "mapTo" : "locLatitude"
+    },
+    
+    "Vehicle.CurrentLocation.Longitude" : {
+      "namespace" : "vss",
+      "mapTo" : "locLongitude"
+    },
+  
+    "Vehicle.CurrentLocation.Heading" : {
+      "desc" : "Current heading relative to geographic north. 0 = North, 90 = East, 180 = South, 270 = West.",
+      "namespace" : "vss",
+      "mapTo" : "locHeading"
+    },
+  
+    "Vehicle.Body.Windshield.Front.Wiping.Mode" : {
+      "desc" : "https://digitalauto.netlify.app/model/bqK3PG5eqsdRQ7WBE54u/cvi/list/Vehicle.Body.Windshield.Front.Wiping.Mode/",
+      "namespace" : "vss",
+      "mapTo" : "frontWipingMode"
+    },
+  
+    "Vehicle.Body.Windshield.Front.Wiping.Intensity" : {
+      "desc" : "https://digitalauto.netlify.app/model/bqK3PG5eqsdRQ7WBE54u/cvi/list/Vehicle.Body.Windshield.Front.Wiping.Intensity/",
+      "namespace" : "vss",
+      "mapTo" : "frontWipingIntensity"
+    },
+  
+    "Vehicle.Body.Lights.IsHazardsOn" : {
+      "namespace" : "vss",
+      "mapTo" : "isHazardsOn"
+    }
+  }
+}
