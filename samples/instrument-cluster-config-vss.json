@@ -1,10 +1,10 @@
 {
   "subscription": {
+
     "Vehicle.Speed": {
       "namespace": "vss",
-      "mapTo": "Speed"
+      "mapTo": ["Speed", "VehicleSpeed"]
     },
-
 
     "Vehicle.Chassis.Accelerator.PedalPosition": {
       "namespace": "vss",
