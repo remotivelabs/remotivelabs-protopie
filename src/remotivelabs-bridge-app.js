@@ -91,7 +91,12 @@ ppConnect
             for (signal of response.signal) {
                 //console.log(signal)
                 const name = jsonConfig.subscription[signal.id.name].mapTo ? jsonConfig.subscription[signal.id.name].mapTo : signal.id.name
-                sendMessageToConnect(name, getSignalValue(signal))
+                
+                if (Array.isArray(name)) {
+                    name.forEach( n => sendMessageToConnect(n, getSignalValue(signal)))
+                } else {
+                    sendMessageToConnect(name, getSignalValue(signal))
+                }
             }
         } catch (e) {
             console.log(e)
