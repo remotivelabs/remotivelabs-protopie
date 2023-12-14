@@ -136,7 +136,7 @@ function sendMessageToConnect(messageId, value) {
 
 function getSignalValue(signal) {
     if (signal.payload == 'double') {
-        return signal.double
+        return parseInt(signal.double)
     } else if (signal.payload == 'integer') {
         return signal.integer
     } else if (signal.payload == 'arbitration') {
