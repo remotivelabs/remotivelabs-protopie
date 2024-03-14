@@ -1,5 +1,9 @@
 # RemotiveLabs + Protopie
 
+*NOTE - Our OLD nodejs bridge-app has been deprecated in favour of our CLI. You can
+still use the old bridge-app if you want. Blogs and videos are using the old app
+but are still very useful*
+
 Use our RemotiveCloud together with Protopie and feed real vehicle signals 
 into your prototype.
 
@@ -10,8 +14,6 @@ Read this blogpost for a good introduction https://www.protopie.io/blog/challeng
 ## Try it out yourself
 
 This solution requires [Protopie-Connect](https://www.protopie.io/learn/docs/connect/getting-started) which in turn requires a Protopie Pro or Enterprise [plan](https://www.protopie.io/plans).
-
-*Disclaimer: This is a fully functional but not yet officially released protopie-connect bridge-app*
 <hr />
 
 Here is a video that goes through each step in this README, its highly recommended
@@ -21,42 +23,36 @@ to watch this video to get a better understanding of how it works.
 
 ## Prepare recording in RemotiveCloud
 
-1. Go to https://demo.remotivelabs.com and approve the captcha.
-2. Follow instructions to start a broker and play the recording to the broker.
-3. Finally press "Go to broker" to open our RemotiveBrokerApp from which you can control the recording being played.
+You can try this out in our demo at https://demo.remotivelabs.com but we recommend
+creating a free (or use an existing) account at https://cloud.remotivelabs.com. 
+
+When creating a free account you will get some example drivecycles automatically and
+existing users can click the "import" button in the top right corner under "Recordings".
+
+1. Follow instructions to start a broker and play the recording to the broker, make sure to use "configuration_vss" if you want to use VSS.
+2. Finally press "Go to broker" to open our RemotiveBrokerApp from which you can control the recording being played.
 
 
 ## Start connect bridge
 
-**The steps above must be performed before starting the bridge-app since we the bridge-app will try to connect to the cloud**
+Our ProtoPie Connect bridge is started using RemotiveCLI, read about installation
+https://docs.remotivelabs.com/docs/remotive-cli/installation and details about how to
+use connect is found here https://docs.remotivelabs.com/docs/remotive-cli/cli_man_pages#remotive-connect-protopie
 
-*Requires node 18.3 or higher*
+Once you are playing a recording you can find CLI snippets in our BrokerApp that you can simply
+copy/paste and use directly.
 
-1. Make sure that protopie-connect is up and running!
 
-2. Install deps
-```sh
-npm install
+In short, this is how it looks
+```
+remotive connect protopie \
+  --signal vss:Vehicle.Speed \
+  --signal vss:Vehicle.Chassis.SteeringWheel.Angle \
+  --broker-url https://my_cloud_broker \
+  --api-key xxx    
 ```
 
-3. Start bridge-app
-
-Replace $BROKER_URL and $API_KEY below with the correct values found in RemotiveBrokerApp
-
-<img src="broker_details.png"  width="70%" height="70%">
-
-```sh
-node src/remotivelabs-bridge-app.js \
-    --url $BROKER_URL \
-    --api_key $API_KEY \
-    --config samples/instrument-cluster-config.json
-```
-
-If you get this error you are using node < 18.3 so please update to a newer version.
-    
-    TypeError: parseArgs is not a function
-
-### Play the recording
+### Control the recording
 
 Once the bridge-app is running you can "play" the recording from the RemotiveBrokerApp. 
 Simply press the play icon and you should see the progressbar moving. There should also be 
@@ -66,43 +62,15 @@ with Play, Pause & Stop and also drag the progressbar back and forth to seek to 
 
 <img src="remotive_broker_app_play.png"  width="90%" height="90%">
 
-## Run Pie
+## Run Pies
 
-There are two bundled *pies* with this demo, one with only speed 
-(car-integration-just-speed.pie) and a bigger instrument cluster with gear, steering wheel direction and more (car-integration-instrument-cluster.pie). Both works out-of-the-box so you can pick any of them or run both.
+There are two Pies under samples directory, AMG_GT_Cluster_Gauge.pie that you can use
+when you start any of our drivecycles with "raw" signals and AMG_GT_Cluster_Gauge.pie that
+you should use if you run a drivecycle with VSS transformations (configuration_vss) in our cloud.
 
-* You should now see signals showing up in Protopie connect.
-* Add car-integration-just-speed.pie to ProtoPie connect and start it in web-browser.
-* That should be it!
-
-## Troubleshooting
-
-Some common errors
-
-### Connect failures
-
-* Mostly, the reason is that there is no broker listening to the url you have provided. Please check the url of the broker again.
-
-```
-Failed to connect to broker
-13 INTERNAL: Received RST_STREAM with code 0
-```
-
-* Check your APP_KEY so that matches
-
-```
-Failed to connect to broker
-2 UNKNOWN:
-```
-
-* If you get this message directly when connecting its probably due to you are subscribing
-  to a signal that does not exist
-```
-Subscription stream ended
-```
+Thats it, you should now see your cluster coming alive.
 
 Please do not hesitate to use our discussion/community forum for questions regarding this.
 
 https://github.com/remotivelabs/remotivelabs-community/discussions
-
 

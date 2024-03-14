@@ -1,4 +1,5 @@
 {
+  "Description" : "Example VSS config when mapping is required",
   "subscription": {
 
     "Vehicle.Speed": {

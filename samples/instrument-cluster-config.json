@@ -1,4 +1,6 @@
 {
+
+  "Description" : "Example VSS config when mapping is required",
   "subscription": {
     "ID257DIspeed.DI_uiSpeed": {
       "namespace": "VehicleBus",
