@@ -1,13 +1,8 @@
 # RemotiveLabs + Protopie
 
-*NOTE - Our OLD nodejs bridge-app has been deprecated in favour of our CLI. You can
-still use the old bridge-app if you want. Blogs and videos are using the old app
-but are still very useful*
+Use our RemotiveCloud together with Protopie and feed real vehicle signals into your prototype.
 
-Use our RemotiveCloud together with Protopie and feed real vehicle signals 
-into your prototype.
-
-Read this blogpost for a good introduction https://www.protopie.io/blog/challenging-the-status-quo-in-automotive-prototyping
+Read [this blogpost](https://www.protopie.io/blog/challenging-the-status-quo-in-automotive-prototyping) for a good introduction. 
 
 ![alt text](screenshot.png "Screenshot")
 
@@ -23,54 +18,43 @@ to watch this video to get a better understanding of how it works.
 
 ## Prepare recording in RemotiveCloud
 
-You can try this out in our demo at https://demo.remotivelabs.com but we recommend
-creating a free (or use an existing) account at https://cloud.remotivelabs.com. 
+The first step is to create a [free account at RemotiveCloud](https://cloud.remotivelabs.com) or use an existing account. When creating a free account you will get some sample drivecycles with real vehicle data automatically. Existing users can click the "import" button in the top right corner under "Recordings" to get the same sample drivecycles. 
 
-When creating a free account you will get some example drivecycles automatically and
-existing users can click the "import" button in the top right corner under "Recordings".
+Next steps:
 
-1. Follow instructions to start a broker and play the recording to the broker, make sure to use "configuration_vss" if you want to use VSS.
-2. Finally press "Go to broker" to open our RemotiveBrokerApp from which you can control the recording being played.
+- Go to recordings, choose which one to use and prepare that recording for plackback (by clicking the "Prepare for playback"-button). Make sure to use "configuration_vss" if you want to use VSS.
+- Play the recording 
 
+## Connect to ProtoPie Connect
 
-## Start connect bridge
+Our ProtoPie Connect bridge is started using RemotiveCLI, read about [installation of the CLI](https://docs.remotivelabs.com/docs/remotive-cli/installation) and details about how to [connect to ProtoPie Connect](https://docs.remotivelabs.com/docs/remotive-cli/cli_man_pages#remotive-connect-protopie)
 
-Our ProtoPie Connect bridge is started using RemotiveCLI, read about installation
-https://docs.remotivelabs.com/docs/remotive-cli/installation and details about how to
-use connect is found here https://docs.remotivelabs.com/docs/remotive-cli/cli_man_pages#remotive-connect-protopie
-
-Once you are playing a recording you can find CLI snippets in our BrokerApp that you can simply
-copy/paste and use directly.
-
+In RemotiveCloud you can find a "examples to subscribe to signals from an external application" section where you will get the CLI snippets needed to get you going with connecting to ProtoPie Connect and subscribing to the signals needed to get our sample Pies going. 
 
 In short, this is how it looks
 ```
-remotive connect protopie \
-  --signal vss:Vehicle.Speed \
-  --signal vss:Vehicle.Chassis.SteeringWheel.Angle \
-  --broker-url https://my_cloud_broker \
-  --api-key xxx    
+remotive connect protopie
+--signal vss:Vehicle.Chassis.SteeringWheel.Angle
+--signal vss:Vehicle.Speed
+--broker-url https://my_cloud_broker
+--api-key xxx   
 ```
 
 ### Control the recording
 
-Once the bridge-app is running you can "play" the recording from the RemotiveBrokerApp. 
-Simply press the play icon and you should see the progressbar moving. There should also be 
-message visible in protopie-connect and in the terminal where the bridge-app was started.
-This means that the recording is being replayed properly. You can now control the recording
-with Play, Pause & Stop and also drag the progressbar back and forth to seek to specific place in the recording.
+Once the connection is setup, you can play the recording from the RemotiveCloud, and you should see messages in ProtoPie Connect. 
+You can now control the recording with play, pause & stop and also drag the progressbar back and forth to seek to specific place in the recording.
 
 <img src="remotive_broker_app_play.png"  width="90%" height="90%">
 
 ## Run Pies
 
-There are two Pies under samples directory, AMG_GT_Cluster_Gauge.pie that you can use
-when you start any of our drivecycles with "raw" signals and AMG_GT_Cluster_Gauge.pie that
-you should use if you run a drivecycle with VSS transformations (configuration_vss) in our cloud.
+The final step to actually seeing these signal come to life is to connect it to a Pie. Start by downloading one of these two sample Pies (make sure to use the VSS one if you are playing a recording with a VSS transformation). 
 
-Thats it, you should now see your cluster coming alive.
+- [AMG_GT_Cluster_Gauge.pie](https://github.com/remotivelabs/remotivelabs-protopie/blob/main/samples/AMG_GT_Gauge_Cluster.pie) - use when you start any of our drivecycles with "raw" signals
+- [AMG_GT_Gauge_Cluster_VSS.pie](https://github.com/remotivelabs/remotivelabs-protopie/blob/main/samples/AMG_GT_Gauge_Cluster_VSS.pie) - use if you run a drivecycle with VSS transformations (configuration_vss) 
 
-Please do not hesitate to use our discussion/community forum for questions regarding this.
+Next open/import the Pie in you ProtoPie Connect app, preview it and press play in RemotiveCloud. Now you should see the Pie come to life! 
 
-https://github.com/remotivelabs/remotivelabs-community/discussions
+Please do not hesitate to use our [discussion/community forum](https://github.com/remotivelabs/remotivelabs-community/discussions) for questions regarding this or to contact us at support@remotivelabs.com if you have any questions.
 
