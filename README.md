@@ -34,10 +34,10 @@ In RemotiveCloud you can find a _examples to subscribe to signals from an extern
 In short, this is how it looks:
 ```
 remotive connect protopie \
---signal vss:Vehicle.Chassis.SteeringWheel.Angle \
---signal vss:Vehicle.Speed \
---broker-url https://my_cloud_broker \
---api-key xxx \
+    --signal vss:Vehicle.Chassis.SteeringWheel.Angle \
+    --signal vss:Vehicle.Speed \
+    --broker-url https://my_cloud_broker \
+    --api-key xxx
 ```
 
 ### Control the recording
