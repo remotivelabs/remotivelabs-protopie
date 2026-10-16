@@ -27,7 +27,7 @@ Next steps:
 
 ## Connect to ProtoPie Connect
 
-Our ProtoPie Connect bridge is setup using RemotiveCLI, read about [installation of the CLI](https://docs.remotivelabs.com/docs/remotive-cli/installation) and details about how to [connect to ProtoPie Connect](https://docs.remotivelabs.com/docs/remotive-cli/cli_man_pages#remotive-connect-protopie).
+Our ProtoPie Connect bridge is setup using RemotiveCLI, read about [installation of the CLI](https://developer.remotivelabs.com/docs/remotive-cli/installation) and details about how to [connect to ProtoPie Connect](https://developer.remotivelabs.com/docs/remotive-cli/cli_man_pages#remotive-connect-protopie).
 
 In RemotiveCloud you can find a _examples to subscribe to signals from an external application_ section where you will get the CLI snippets needed to get going with connecting to ProtoPie Connect and subscribing to the signals needed to get our sample Pies running.
 
